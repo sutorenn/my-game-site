@@ -3,16 +3,48 @@
  * 各作品：atmosphere（雰囲気）/ highlight（見どころ）/ point（おすすめポイント）
  */
 
-const SITE_NAME = "最強・神曲アニメナビ";
+const SITE_NAME = "アニメ特化ナビ";
 
 const SITE_HOME = {
-  seoTitle: "【2026】神アニメランキングTOP10｜最強主人公・神BGMの名作",
+  seoTitle: "【2026】アニメ特化サイト｜神ランキング・最強主人公・神BGM",
   metaDescription:
-    "2026年版 神アニメランキングTOP10。86、終わりのセラフ、陰の実力者、FAIRY TAILなど好みに合う名作をおすすめ度★・タグ付きで紹介。最強主人公・神BGM特集へリンク。",
+    "アニメ特化のおすすめサイト。2026年版神アニメランキングTOP10、最強主人公・神BGM・ダークファンタジー・見返したくなるアニメ、86好き・陰の実力者好き向け特集。",
   intro:
-    "細かいストーリーを覚えていなくても大丈夫。「雰囲気」で選べる2026年版神アニメランキングと、最強主人公・神曲・見返したくなる作品の特集を掲載しています。",
-  related: ["strongest", "bgm", "rewatch", "dark"],
+    "最強主人公・神BGM・何度も見返したくなるアニメを中心にした、アニメ特化のおすすめポータルです。ランキングとジャンル別特集から、次に見る1本を見つけられます。",
+  related: ["strongest", "bgm", "rewatch", "dark", "like86", "shadow"],
 };
+
+/** トップページのカテゴリ紹介（4つ） */
+const HUB_CATEGORIES = [
+  {
+    id: "strongest",
+    title: "最強主人公アニメ",
+    desc: "圧倒的なヒーローとカタルシス",
+    file: "anime-strongest.html",
+    accent: "battle",
+  },
+  {
+    id: "bgm",
+    title: "神BGMアニメ",
+    desc: "音楽だけで思い出せる名作",
+    file: "anime-bgm.html",
+    accent: "bgm",
+  },
+  {
+    id: "dark",
+    title: "ダークファンタジーアニメ",
+    desc: "暗い世界観と緊張のバトル",
+    file: "anime-dark.html",
+    accent: "dark",
+  },
+  {
+    id: "rewatch",
+    title: "何度も見返したくなるアニメ",
+    desc: "週末にまた見たくなる熱さ",
+    file: "anime-rewatch.html",
+    accent: "rewatch",
+  },
+];
 
 /**
  * 2026年版 神アニメランキング TOP10（トップページ用）
@@ -25,8 +57,8 @@ const GOD_TIER_RANKING_2026 = [
     rating: 5,
     comment: "音が流れた瞬間に戦場が蘇る。細部より「空気」で泣ける、何度も見返すSF戦争劇。",
     tags: ["神BGM", "感動", "見返したくなる"],
-    page: "anime-bgm.html",
-    pageLabel: "神BGM特集を見る",
+    page: "anime-like86.html",
+    pageLabel: "86好きならこれ 特集を見る",
   },
   {
     rank: 2,
@@ -43,8 +75,8 @@ const GOD_TIER_RANKING_2026 = [
     rating: 5,
     comment: "最強主人公のカタルシスが爽快。決めシーンは内容を忘れててもテンション上がる。",
     tags: ["最強主人公", "見返したくなる"],
-    page: "anime-strongest.html",
-    pageLabel: "最強主人公特集を見る",
+    page: "anime-shadow.html",
+    pageLabel: "陰の実力者好き特集を見る",
   },
   {
     rank: 4,
@@ -210,6 +242,52 @@ const ANIME_PAGES = {
       { rank: 8, title: "86-エイティシックス-", atmosphere: "戦争の残酷さと、差別の静かな悲しみ。SFの終末感。", highlight: "戦場の無力さと、それでも戦う少年少女たち。", point: "ダークSFファンタジーとして音楽とセットで見返したくなる。" },
       { rank: 9, title: "盾の勇者の成り上がり", atmosphere: "裏切りから始まる暗いスタート。異世界の陰謀と成長。", highlight: "最底辺から這い上がるカタルシス。", point: "最初がダークで、その後のバトル熱との落差が印象的。" },
       { rank: 10, title: "陰の実力者になりたくて！", atmosphere: "秘密組織・陰謀・ダークな仮装のファンタジー。", highlight: "表と裏の二重生活、ド派手な演出。", point: "ダークの雰囲気だけ欲しいときに。コミカルに転じるので見やすい。" },
+    ],
+  },
+  like86: {
+    file: "anime-like86.html",
+    breadcrumb: "86好きならこれ",
+    linkDesc: "戦場・音楽・切なさが似ている作品",
+    related: ["bgm", "dark", "rewatch"],
+    seoTitle: "86好きならこれ｜似た雰囲気のアニメおすすめ",
+    metaDescription:
+      "86-エイティシックス-が好きな人向けのおすすめアニメ。戦場の緊迫感・神BGM・切ない雰囲気が近い作品を厳選。",
+    h1: "86好きならこれ",
+    intro:
+      "86の「戦場の空気」「音楽の余韻」「切ない距離感」が好きな人向け。細部のプロットより、似た雰囲気で選んだ作品です。",
+    accent: "bgm",
+    list: [
+      { rank: 1, title: "終わりのセラフ", atmosphere: "終末戦と少年兵、ダークで緊張する空気。", highlight: "チームで戦う緊迫感と、剣のバトル。", point: "86の戦場テンションに近い。ダーク寄りで見返しやすい。" },
+      { rank: 2, title: "進撃の巨人", atmosphere: "絶望と戦いの重さ。世界の閉塞感が強い。", highlight: "巨大な脅威との死闘、人間ドラマ。", point: "シリアスな戦争・終末感が好きな86ファン向け。" },
+      { rank: 3, title: "ヴァイオレット・エヴァーガーデン", atmosphere: "戦争の傷と、言葉を学ぶ静かな物語。", highlight: "美しい音楽と、感情のピーク。", point: "86の「音で泣く」系の感動が欲しい人に。" },
+      { rank: 4, title: "幼女戦記", atmosphere: "冷たい戦場と、異世界転生の軍隊劇。", highlight: "戦術と絶望的な戦況の描写。", point: "86のSF戦争に近い緊張感。頭脳戦寄り。" },
+      { rank: 5, title: "罪と罰のギルティクラウン", atmosphere: "近未来・ウイルス・悲しいメロディの世界。", highlight: "挿入歌と戦闘がリンクする名シーン。", point: "音楽×戦場のバランスが86に似ている。" },
+      { rank: 6, title: "蒼き鋼のアルペジオ", atmosphere: "艦隊戦のSF、海戦の緊迫。", highlight: "チーム戦術とメカニカルな戦い。", point: "86の「チームで戦場」感が好きな人向け。" },
+      { rank: 7, title: "チェンソーマン", atmosphere: "現代的でダーク、突然の切なさ。", highlight: "スタイリッシュな戦闘と意外な余韻。", point: "86の静けさと爆発の落差が好きな人に。" },
+      { rank: 8, title: "宇宙兄弟", atmosphere: "夢と現実の距離、じわじわ刺さる人間劇。", highlight: "努力と挫折の積み重ね。", point: "戦場ではないが、86の「静かな感動」枠で刺さる。" },
+    ],
+  },
+  shadow: {
+    file: "anime-shadow.html",
+    breadcrumb: "陰の実力者好きならこれ",
+    linkDesc: "最強感・秘密組織・ド派手演出が似ている作品",
+    related: ["strongest", "rewatch", "dark"],
+    seoTitle: "陰の実力者好きならこれ｜似た雰囲気のアニメおすすめ",
+    metaDescription:
+      "陰の実力者になりたくて！が好きな人向け。最強主人公・秘密組織・中二病的カタルシスが近いアニメを厳選。",
+    h1: "陰の実力者好きならこれ",
+    intro:
+      "陰の実力者の「最強の秘密」「ド派手な演出」「スカッとする決め」が好きな人向け。雰囲気が近い作品だけ集めました。",
+    accent: "battle",
+    list: [
+      { rank: 1, title: "ようこそ実力至上主義の教室へ", atmosphere: "学園の裏で動く最強、クールな策略。", highlight: "表と裏のギャップ、頭脳で勝つ爽快感。", point: "陰の実力者の「隠れ最強」系が好きな人の定番。" },
+      { rank: 2, title: "オーバーロード", atmosphere: "魔王側の最強、圧倒的な力のファンタジー。", highlight: "敵を蹂躙するカタルシス、ダークコメディ。", point: "もっとぶっ飛んだ最強感が欲しいときに。" },
+      { rank: 3, title: "転生したらスライムだった件", atmosphere: "のんびり見えて最強、建国ファンタジー。", highlight: "能力吸収と仲間づくりの快進撃。", point: "ストレスなく最強を楽しみたい陰実力者ファン向け。" },
+      { rank: 4, title: "モブサイコ100", atmosphere: "地味な最強、爆発時の圧倒差。", highlight: "感情100%の能力解放シーン。", point: "普段は弱そう→最強のギャップが似ている。" },
+      { rank: 5, title: "コードギアス 反逆のルルーシュ", atmosphere: "仮面の指導者、復讐と策略のダーク劇。", highlight: "ゼロとして世界を動かすカリスマ。", point: "秘密組織・陰謀・最強の三拍子が好きな人に。" },
+      { rank: 6, title: "ハズレ枠の状態異常「弱小」", atmosphere: "見下され枠からの逆転、異世界バトル。", highlight: "状態異常で敵を出し抜く快感。", point: "陰実力者の「隠し力」テンションに近い。" },
+      { rank: 7, title: "ワンパンマン", atmosphere: "最強すぎて退屈、ギャグと破壊の混合。", highlight: "本気の一撃、怪人とのスケール戦。", point: "純粋な「最強主人公」カタルシスが欲しい人に。" },
+      { rank: 8, title: "斧乙", atmosphere: "ダークヒーロー、最凶の力と人間性。", highlight: "狂気と戦闘のハイテンション。", point: "陰実力者よりダーク寄りだが、最強感は同系統。" },
     ],
   },
 };
