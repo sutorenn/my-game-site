@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Vault — 人気ゲーム紹介</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ヘッダー：サイト名とナビゲーション -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="#" class="logo">GAME<span>VAULT</span></a>
+      <nav class="nav">
+        <a href="#valorant">VALORANT</a>
+        <a href="#minecraft">Minecraft</a>
+        <a href="#genshin">原神</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- メインビジュアル -->
+  <section class="hero">
+    <div class="hero__glow"></div>
+    <p class="hero__label">PICK YOUR NEXT ADVENTURE</p>
+    <h1 class="hero__title">人気ゲームを<br>ひと目で知る</h1>
+    <p class="hero__text">
+      初心者向けに、ジャンル・魅力・始め方のポイントをまとめました。<br>
+      気になるタイトルへスクロールしてチェック。
+    </p>
+    <a href="#games" class="hero__btn">ゲーム一覧へ</a>
+  </section>
+
+  <!-- ゲーム紹介カード -->
+  <main id="games" class="games">
+    <h2 class="section-title">FEATURED GAMES</h2>
+    <p class="section-sub">今、世界中で遊ばれている3大作</p>
+
+    <!-- VALORANT -->
+    <article id="valorant" class="card card--valorant">
+      <div class="card__badge">FPS / 対戦</div>
+      <h3 class="card__title">VALORANT</h3>
+      <p class="card__tagline">戦術FPS × キャラクター能力</p>
+      <p class="card__desc">
+        Riot Gamesが手がける5対5のタクティカルシューター。エージェントごとに異なるスキルを駆使し、
+        チームで攻守を組み立てるのが醍醐味。短いラウンド制で1試合もテンポよく進むため、
+        初めてのFPSでもルールを覚えやすい作品です。
+      </p>
+      <ul class="card__points">
+        <li>無料プレイ（PC向け）</li>
+        <li>ランクマッチで実力を試せる</li>
+        <li>日本語対応・国内サーバーあり</li>
+      </ul>
+      <div class="card__meta">
+        <span>開発</span> Riot Games
+        <span>プラットフォーム</span> PC
+      </div>
+    </article>
+
+    <!-- Minecraft -->
+    <article id="minecraft" class="card card--minecraft">
+      <div class="card__badge">サンドボックス / クラフト</div>
+      <h3 class="card__title">Minecraft</h3>
+      <p class="card__tagline">ブロックでつくる、無限の世界</p>
+      <p class="card__desc">
+        立方体のブロックを集め、建築し、冒険するサンドボックスゲームの金字塔。
+        サバイバルで敵と戦いながら生活するも、クリエイティブで街をつくるも、
+        マルチプレイで友達と遊ぶも自由自在。世代を超えて愛される理由がここにあります。
+      </p>
+      <ul class="card__points">
+        <li>創造・建築・探索の自由度が高い</li>
+        <li>Modやシードで遊び方が無限</li>
+        <li>家族や友人と一緒にプレイしやすい</li>
+      </ul>
+      <div class="card__meta">
+        <span>開発</span> Mojang Studios
+        <span>プラットフォーム</span> PC / コンソール / モバイル
+      </div>
+    </article>
+
+    <!-- 原神 -->
+    <article id="genshin" class="card card--genshin">
+      <div class="card__badge">オープンワールド / RPG</div>
+      <h3 class="card__title">原神</h3>
+      <p class="card__tagline">元素で紡ぐ、広大なファンタジー冒険</p>
+      <p class="card__desc">
+        miHoYo（HoYoverse）によるオープンワールドアクションRPG。
+        七つの国を舞台に、元素反応を組み合わせたバトルと美しい風景の探索が魅力。
+        ストーリー・キャラクター・イベントが継続更新され、常に新しい冒険が待っています。
+      </p>
+      <ul class="card__points">
+        <li>無料でプレイ開始可能</li>
+        <li>クロスセーブ（対応機種）</li>
+        <li>豊富なキャラと元素パーティ編成</li>
+      </ul>
+      <div class="card__meta">
+        <span>開発</span> HoYoverse
+        <span>プラットフォーム</span> PC / PS / モバイル など
+      </div>
+    </article>
+  </main>
+
+  <!-- 比較表（初心者向けの目安） -->
+  <section class="compare">
+    <h2 class="section-title">はじめての方へ</h2>
+    <p class="section-sub">どれを選ぶ？ざっくり比較</p>
+    <div class="compare__table-wrap">
+      <table class="compare__table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>VALORANT</th>
+            <th>Minecraft</th>
+            <th>原神</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>向いている人</td>
+            <td>対戦・反射神経が好き</td>
+            <td>創作・のんびり探索が好き</td>
+            <td>ストーリー・収集が好き</td>
+          </tr>
+          <tr>
+            <td>プレイスタイル</td>
+            <td>短時間の対戦中心</td>
+            <td>自分のペースで長時間</td>
+            <td>クエストと探索を組み合わせ</td>
+          </tr>
+          <tr>
+            <td>無料で始める</td>
+            <td>◎</td>
+            <td>体験版・旧版あり※</td>
+            <td>◎</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="compare__note">※ Minecraftは有料版が本体。体験や教育版など選択肢あり。</p>
+  </section>
+
+  <footer class="footer">
+    <p>Game Vault — 学習用サンプルサイト</p>
+    <p class="footer__small">各ゲームの名称・ロゴは各権利者に帰属します。</p>
+  </footer>
+</body>
+</html>

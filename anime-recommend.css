@@ -1,0 +1,1204 @@
+/* ============================================
+   今見るべきおすすめアニメ診断
+   anime-recommend.html と同じフォルダに置いてください
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-deep: #050508;
+  --bg-card: #0d0d12;
+  --bg-elevated: #14141c;
+  --text: #e8e8ef;
+  --text-muted: #8a8a9a;
+  --border: rgba(255, 255, 255, 0.08);
+  --accent: #a855f7;
+  --accent-glow: rgba(168, 85, 247, 0.4);
+  --bgm: #8b5cf6;
+  --rewatch: #f59e0b;
+  --dark-fantasy: #64748b;
+  --battle: #ff4655;
+  --emotion: #f59e0b;
+  --romance: #ec4899;
+  --daily: #22d3ee;
+  --mind: #34d399;
+  --star: #fbbf24;
+  --font-sans: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", Meiryo, sans-serif;
+  --font-display: "Segoe UI", var(--font-sans);
+  --tap-min: 44px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-deep);
+  background-image: radial-gradient(ellipse 100% 60% at 50% -10%, rgba(168, 85, 247, 0.12), transparent);
+  color: var(--text);
+  line-height: 1.7;
+  min-height: 100vh;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* --- ヘッダー --- */
+.header {
+  padding: 2rem 1.25rem 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.header__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 4vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+.logo span {
+  display: block;
+  font-size: 0.75em;
+  color: var(--accent);
+  margin-top: 0.25rem;
+}
+
+.header__tagline {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* --- 広告スペース --- */
+.ad {
+  max-width: 900px;
+  margin: 1.25rem auto;
+  padding: 0 1.25rem;
+}
+
+.ad__label,
+.ad__placeholder {
+  text-align: center;
+}
+
+.ad > div,
+.ad {
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 1.25rem;
+}
+
+.ad__label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.ad__placeholder {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.ad--bottom {
+  margin-bottom: 2rem;
+}
+
+/* --- メイン --- */
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.25rem 2rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+
+.section-title--small {
+  font-size: 0.85rem;
+}
+
+.section-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+/* --- ジャンルボタン --- */
+.genre {
+  margin-bottom: 2rem;
+}
+
+.genre__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: center;
+}
+
+.genre-btn {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.75rem 1.35rem;
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.genre-btn:hover {
+  transform: translateY(-2px);
+}
+
+.genre-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.genre-btn.is-active {
+  color: #fff;
+  border-color: transparent;
+}
+
+.genre-btn--strongest.is-active,
+.genre-btn--strongest:hover {
+  background: var(--battle);
+  box-shadow: 0 0 24px rgba(255, 70, 85, 0.45);
+}
+
+.genre-btn--bgm.is-active,
+.genre-btn--bgm:hover {
+  background: #8b5cf6;
+  box-shadow: 0 0 24px rgba(139, 92, 246, 0.45);
+}
+
+.genre-btn--rewatch.is-active,
+.genre-btn--rewatch:hover {
+  background: var(--emotion);
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.45);
+}
+
+.genre-btn--dark.is-active,
+.genre-btn--dark:hover {
+  background: #475569;
+  box-shadow: 0 0 24px rgba(71, 85, 105, 0.55);
+}
+
+/* --- 検索 --- */
+.search {
+  margin-bottom: 2rem;
+  padding: 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.search__label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.search__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search__input {
+  width: 100%;
+  padding: 0.85rem 2.5rem 0.85rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search__input::placeholder {
+  color: var(--text-muted);
+}
+
+.search__input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.search__clear {
+  position: absolute;
+  right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, color 0.2s, background 0.2s;
+}
+
+.search__clear.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.search__clear:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.search__hint {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* --- 結果エリア --- */
+.results__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.results__count {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.results__genre-label {
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  min-height: 1.4em;
+}
+
+.anime-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.anime-list__empty,
+.anime-list__no-match {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  background: var(--bg-card);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+}
+
+/* --- アニメカード --- */
+.anime-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem 1.35rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.anime-card:hover {
+  border-color: rgba(168, 85, 247, 0.35);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.anime-card__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.anime-card__stars {
+  font-size: 0.95rem;
+  color: var(--star);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.65rem;
+}
+
+.anime-card__stars .rating-num {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-left: 0.35rem;
+}
+
+/* 雰囲気・見どころ・おすすめポイント */
+.anime-card__meta {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.anime-card__meta > div {
+  padding: 0.65rem 0.85rem;
+  background: var(--bg-elevated);
+  border-radius: 8px;
+  border-left: 3px solid var(--accent);
+}
+
+.anime-card__meta dt {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.25rem;
+}
+
+.anime-card__meta dd {
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.anime-card[data-genre="strongest"] .anime-card__meta > div {
+  border-left-color: var(--battle);
+}
+
+.anime-card[data-genre="bgm"] .anime-card__meta > div {
+  border-left-color: #8b5cf6;
+}
+
+.anime-card[data-genre="rewatch"] .anime-card__meta > div {
+  border-left-color: var(--emotion);
+}
+
+.anime-card[data-genre="dark"] .anime-card__meta > div {
+  border-left-color: #64748b;
+}
+
+/* --- 2026年版 神アニメランキング TOP10 --- */
+.top10 {
+  margin-bottom: 1.5rem;
+  padding: 1.25rem 0 0;
+}
+
+.top10__badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--star);
+  margin-bottom: 0.5rem;
+}
+
+.top10__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 4.5vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 0.35rem;
+  background: linear-gradient(90deg, #fbbf24, #f59e0b, var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.top10__sub {
+  margin-bottom: 1.25rem;
+}
+
+.top10-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.top10-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 200px;
+}
+
+.top10-card__inner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.15rem 1.25rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.top10-card:hover .top10-card__inner {
+  border-color: rgba(251, 191, 36, 0.4);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+.top10-card--podium .top10-card__inner {
+  border-color: rgba(251, 191, 36, 0.25);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.06), var(--bg-card));
+}
+
+.top10-card__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.top10-card__rank {
+  flex-shrink: 0;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.15rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), #6366f1);
+  border-radius: 8px;
+}
+
+.top10-card[data-rank="1"] .top10-card__rank {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+}
+
+.top10-card[data-rank="2"] .top10-card__rank {
+  background: linear-gradient(135deg, #94a3b8, #64748b);
+}
+
+.top10-card[data-rank="3"] .top10-card__rank {
+  background: linear-gradient(135deg, #cd7f32, #a16207);
+}
+
+.top10-card__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 0.35rem;
+}
+
+.top10-card__stars {
+  font-size: 0.9rem;
+  color: var(--star);
+  letter-spacing: 0.04em;
+}
+
+.top10-card__rating-num {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-left: 0.25rem;
+}
+
+.top10-card__comment {
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.75;
+  margin-bottom: 0.75rem;
+}
+
+.top10-card__tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.85rem;
+}
+
+.top10-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+}
+
+.top10-tag--strongest {
+  color: #fecaca;
+  border-color: rgba(255, 70, 85, 0.4);
+  background: rgba(255, 70, 85, 0.12);
+}
+
+.top10-tag--bgm {
+  color: #ddd6fe;
+  border-color: rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.12);
+}
+
+.top10-tag--emotion {
+  color: #fde68a;
+  border-color: rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.12);
+}
+
+.top10-tag--rewatch {
+  color: #a5f3fc;
+  border-color: rgba(34, 211, 238, 0.35);
+  background: rgba(34, 211, 238, 0.1);
+}
+
+.top10-tag--dark {
+  color: #cbd5e1;
+  border-color: rgba(100, 116, 139, 0.5);
+  background: rgba(100, 116, 139, 0.15);
+}
+
+.top10-card__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.35rem 0;
+}
+
+.top10-card__link:hover {
+  text-decoration: underline;
+}
+
+.top10-ad-slot {
+  list-style: none;
+}
+
+.top10-ad-slot .ad {
+  margin: 0;
+  padding: 1rem;
+  min-height: 100px;
+}
+
+.ad--top10-bottom {
+  margin-bottom: 2rem;
+}
+
+/* --- 好きな作品ピックアップ --- */
+.favorites {
+  margin-bottom: 2rem;
+}
+
+.favorites-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.favorites-list li {
+  font-size: 0.82rem;
+  padding: 0.45rem 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-muted);
+}
+
+/* --- パンくずリスト --- */
+.breadcrumb {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.8rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.breadcrumb__list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+}
+
+.breadcrumb__list li {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+}
+
+.breadcrumb__list li:not(:last-child)::after {
+  content: "›";
+  margin-left: 0.5rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.breadcrumb__list a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.breadcrumb__list a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb__list span {
+  color: var(--text);
+}
+
+/* --- 導入文（ページ上部） --- */
+.page-lead {
+  max-width: 900px;
+  margin: 0 auto 1rem;
+  padding: 0 1.25rem;
+}
+
+.page-lead .page-intro {
+  margin-top: 0;
+  padding: 1rem 1.15rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: 1.8;
+}
+
+/* --- サイト内ナビ（全ページ共通） --- */
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.25rem;
+  max-width: 900px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.site-nav a {
+  font-size: 0.8rem;
+  min-height: var(--tap-min);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  color: var(--text-muted);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.site-nav a:hover {
+  color: var(--text);
+  border-color: rgba(168, 85, 247, 0.5);
+}
+
+.site-nav a.is-current {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.site-nav__home.is-current {
+  background: var(--accent);
+}
+
+/* --- トップ：おすすめ特集カード（1枚） --- */
+.featured-card {
+  margin-bottom: 2rem;
+}
+
+.featured-card__link {
+  display: block;
+  padding: 1.35rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.15s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.featured-card__link:hover,
+.featured-card__link--strongest:hover {
+  transform: translateY(-3px);
+  border-color: var(--battle);
+  box-shadow: 0 12px 36px rgba(255, 70, 85, 0.2);
+}
+
+.featured-card__link--strongest {
+  background: linear-gradient(135deg, rgba(255, 70, 85, 0.1), var(--bg-card));
+  border-color: rgba(255, 70, 85, 0.35);
+}
+
+.featured-card__badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--battle);
+  margin-bottom: 0.5rem;
+}
+
+.featured-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 3.5vw, 1.35rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.featured-card__text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+  line-height: 1.7;
+}
+
+.featured-card__cta {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--battle);
+}
+
+/* --- トップ：特集記事リンク --- */
+.articles {
+  margin-bottom: 2rem;
+}
+
+.article-links {
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.article-link {
+  display: block;
+  padding: 1rem 1.15rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.article-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.article-link__label {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-family: var(--font-display);
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+
+.article-link strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.article-link__desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.article-link--strongest:hover { border-left: 3px solid var(--battle); }
+.article-link--bgm:hover { border-left: 3px solid #8b5cf6; }
+.article-link--rewatch:hover { border-left: 3px solid var(--emotion); }
+.article-link--dark:hover { border-left: 3px solid #64748b; }
+
+/* --- ランキングページ --- */
+.header__site {
+  font-size: 0.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.header__site a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.header__site a:hover {
+  text-decoration: underline;
+}
+
+.page-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 4.5vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+}
+
+.page-intro {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  text-align: left;
+  line-height: 1.8;
+}
+
+.main--page {
+  padding-top: 0.5rem;
+}
+
+.back-to-top {
+  margin-bottom: 1.25rem;
+}
+
+.back-to-top__link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.back-to-top__link:hover {
+  border-color: var(--accent);
+  background: var(--bg-elevated);
+}
+
+.ranking-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rank-card__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.rank-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 220px;
+}
+
+.rank-card__num {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), #6366f1);
+  border-radius: 8px;
+}
+
+.rank-card:nth-child(1) .rank-card__num {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+}
+
+.rank-card:nth-child(2) .rank-card__num {
+  background: linear-gradient(135deg, #94a3b8, #64748b);
+}
+
+.rank-card:nth-child(3) .rank-card__num {
+  background: linear-gradient(135deg, #cd7f32, #a16207);
+}
+
+.anime-card--rank .anime-card__title {
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.rank-card[data-accent="battle"] .anime-card__meta > div {
+  border-left-color: var(--battle);
+}
+
+.rank-card[data-accent="bgm"] .anime-card__meta > div {
+  border-left-color: #8b5cf6;
+}
+
+.rank-card[data-accent="rewatch"] .anime-card__meta > div {
+  border-left-color: var(--emotion);
+}
+
+.rank-card[data-accent="dark"] .anime-card__meta > div {
+  border-left-color: #64748b;
+}
+
+/* --- 関連記事 --- */
+.related {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.related-list {
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.related-card {
+  display: block;
+  padding: 0.9rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.related-card:hover {
+  border-color: rgba(168, 85, 247, 0.45);
+  background: var(--bg-elevated);
+}
+
+.related-card strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+
+.related-card span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* --- 記事中・インライン広告 --- */
+.ad--inline,
+.ad--inline-main {
+  margin: 1.5rem auto;
+  padding: 0 1.25rem;
+  max-width: 900px;
+}
+
+.ad-slot {
+  list-style: none;
+}
+
+.ad-slot .ad--inline {
+  margin: 0;
+  padding: 0;
+}
+
+.ad--inline .ad,
+.ad--inline-main.ad {
+  min-height: 120px;
+}
+
+.anime-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 180px;
+}
+
+/* --- フッター --- */
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+
+.footer__top-link {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.footer__top-link:hover {
+  text-decoration: underline;
+}
+
+/* --- スマホ対応 --- */
+@media (max-width: 480px) {
+  .header {
+    padding: 1.25rem 1rem 1rem;
+  }
+
+  .logo {
+    font-size: 1.05rem;
+  }
+
+  .main {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .page-lead,
+  .breadcrumb,
+  .ad {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .site-nav {
+    gap: 0.4rem;
+    padding: 0.65rem 1rem;
+  }
+
+  .site-nav a {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.65rem;
+  }
+
+  .genre-btn {
+    flex: 1 1 calc(50% - 0.35rem);
+    min-width: calc(50% - 0.35rem);
+    min-height: var(--tap-min);
+    padding: 0.75rem 0.5rem;
+    font-size: 0.88rem;
+  }
+
+  .genre-btn:last-child {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .search,
+  .anime-card,
+  .featured-card__link {
+    padding: 1rem;
+  }
+
+  .search__input {
+    font-size: 16px;
+  }
+
+  .back-to-top__link,
+  .footer__top-link {
+    width: 100%;
+    justify-content: center;
+    min-height: var(--tap-min);
+  }
+
+  .ad {
+    min-height: 72px;
+    padding: 1rem;
+  }
+
+  .rank-card__head {
+    gap: 0.65rem;
+  }
+
+  .rank-card__num {
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 1rem;
+  }
+
+  .top10__title {
+    font-size: 1.15rem;
+  }
+
+  .top10-card__inner {
+    padding: 1rem;
+  }
+
+  .top10-card__head {
+    gap: 0.65rem;
+  }
+
+  .top10-card__rank {
+    width: 2.35rem;
+    height: 2.35rem;
+    font-size: 1rem;
+  }
+
+  .top10-card__title {
+    font-size: 0.98rem;
+  }
+
+  .top10-card__link {
+    width: 100%;
+    justify-content: center;
+    padding: 0.5rem;
+    background: var(--bg-elevated);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .genre-btn:hover,
+  .featured-card__link:hover,
+  .article-link:hover {
+    transform: none;
+  }
+}
+
+@media (min-width: 640px) {
+  .anime-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .anime-list__empty,
+  .anime-list__no-match {
+    grid-column: 1 / -1;
+  }
+
+  .article-links,
+  .related-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .top10-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .top10-ad-slot,
+  .ad--top10-bottom {
+    grid-column: 1 / -1;
+  }
+}
