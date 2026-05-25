@@ -3,148 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game Vault — 人気ゲーム紹介</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="アニメ特化のおすすめサイト。2026年版神アニメランキングTOP10、最強主人公・神BGM・ダークファンタジー、86好き・陰の実力者好き向け特集。">
+  <title>【2026】アニメ特化サイト｜神ランキング・最強主人公・神BGM | アニメ特化ナビ</title>
+  <link rel="stylesheet" href="anime-recommend.css">
 </head>
-<body>
-  <!-- ヘッダー：サイト名とナビゲーション -->
-  <header class="header">
+<body data-page="home" class="page-portal">
+  <header class="header header--portal">
+    <div class="header__glow" aria-hidden="true"></div>
     <div class="header__inner">
-      <a href="#" class="logo">GAME<span>VAULT</span></a>
-      <nav class="nav">
-        <a href="#valorant">VALORANT</a>
-        <a href="#minecraft">Minecraft</a>
-        <a href="#genshin">原神</a>
-      </nav>
+      <p class="header__eyebrow">ANIME PORTAL 2026</p>
+      <h1 class="logo">アニメ特化<span>ナビ</span></h1>
+      <p class="header__tagline">最強主人公・神BGM・何度も見返したくなるアニメ</p>
     </div>
   </header>
 
-  <!-- メインビジュアル -->
-  <section class="hero">
-    <div class="hero__glow"></div>
-    <p class="hero__label">PICK YOUR NEXT ADVENTURE</p>
-    <h1 class="hero__title">人気ゲームを<br>ひと目で知る</h1>
-    <p class="hero__text">
-      初心者向けに、ジャンル・魅力・始め方のポイントをまとめました。<br>
-      気になるタイトルへスクロールしてチェック。
-    </p>
-    <a href="#games" class="hero__btn">ゲーム一覧へ</a>
-  </section>
+  <nav class="site-nav site-nav--portal" aria-label="サイト内メニュー">
+    <a href="anime-recommend.html" class="site-nav__home is-current" aria-current="page">トップ</a>
+    <a href="anime-strongest.html">最強主人公</a>
+    <a href="anime-bgm.html">神BGM</a>
+    <a href="anime-rewatch.html">見返す</a>
+    <a href="anime-dark.html">ダーク</a>
+    <a href="anime-like86.html">86好き</a>
+    <a href="anime-shadow.html">陰実力者好き</a>
+  </nav>
 
-  <!-- ゲーム紹介カード -->
-  <main id="games" class="games">
-    <h2 class="section-title">FEATURED GAMES</h2>
-    <p class="section-sub">今、世界中で遊ばれている3大作</p>
+  <nav id="breadcrumb" class="breadcrumb" aria-label="パンくずリスト"></nav>
 
-    <!-- VALORANT -->
-    <article id="valorant" class="card card--valorant">
-      <div class="card__badge">FPS / 対戦</div>
-      <h3 class="card__title">VALORANT</h3>
-      <p class="card__tagline">戦術FPS × キャラクター能力</p>
-      <p class="card__desc">
-        Riot Gamesが手がける5対5のタクティカルシューター。エージェントごとに異なるスキルを駆使し、
-        チームで攻守を組み立てるのが醍醐味。短いラウンド制で1試合もテンポよく進むため、
-        初めてのFPSでもルールを覚えやすい作品です。
-      </p>
-      <ul class="card__points">
-        <li>無料プレイ（PC向け）</li>
-        <li>ランクマッチで実力を試せる</li>
-        <li>日本語対応・国内サーバーあり</li>
-      </ul>
-      <div class="card__meta">
-        <span>開発</span> Riot Games
-        <span>プラットフォーム</span> PC
-      </div>
-    </article>
+  <div class="page-lead page-lead--portal">
+    <p id="page-intro" class="page-intro">最強主人公・神BGM・何度も見返したくなるアニメを中心にした、アニメ特化のおすすめポータルです。</p>
+  </div>
 
-    <!-- Minecraft -->
-    <article id="minecraft" class="card card--minecraft">
-      <div class="card__badge">サンドボックス / クラフト</div>
-      <h3 class="card__title">Minecraft</h3>
-      <p class="card__tagline">ブロックでつくる、無限の世界</p>
-      <p class="card__desc">
-        立方体のブロックを集め、建築し、冒険するサンドボックスゲームの金字塔。
-        サバイバルで敵と戦いながら生活するも、クリエイティブで街をつくるも、
-        マルチプレイで友達と遊ぶも自由自在。世代を超えて愛される理由がここにあります。
-      </p>
-      <ul class="card__points">
-        <li>創造・建築・探索の自由度が高い</li>
-        <li>Modやシードで遊び方が無限</li>
-        <li>家族や友人と一緒にプレイしやすい</li>
-      </ul>
-      <div class="card__meta">
-        <span>開発</span> Mojang Studios
-        <span>プラットフォーム</span> PC / コンソール / モバイル
-      </div>
-    </article>
+  <aside class="ad ad--top" aria-label="広告スペース（上）">
+    <p class="ad__label">AD</p>
+    <p class="ad__placeholder">広告スペース（728×90 など）</p>
+  </aside>
 
-    <!-- 原神 -->
-    <article id="genshin" class="card card--genshin">
-      <div class="card__badge">オープンワールド / RPG</div>
-      <h3 class="card__title">原神</h3>
-      <p class="card__tagline">元素で紡ぐ、広大なファンタジー冒険</p>
-      <p class="card__desc">
-        miHoYo（HoYoverse）によるオープンワールドアクションRPG。
-        七つの国を舞台に、元素反応を組み合わせたバトルと美しい風景の探索が魅力。
-        ストーリー・キャラクター・イベントが継続更新され、常に新しい冒険が待っています。
-      </p>
-      <ul class="card__points">
-        <li>無料でプレイ開始可能</li>
-        <li>クロスセーブ（対応機種）</li>
-        <li>豊富なキャラと元素パーティ編成</li>
-      </ul>
-      <div class="card__meta">
-        <span>開発</span> HoYoverse
-        <span>プラットフォーム</span> PC / PS / モバイル など
-      </div>
-    </article>
+  <main class="main main--portal">
+    <!-- 1. 2026年版 神アニメランキング TOP10 -->
+    <section class="top10 portal-section" id="top10-ranking" aria-labelledby="top10-title">
+      <p class="top10__badge">2026 EDITION</p>
+      <h2 id="top10-title" class="top10__title portal-section__title">2026年版 神アニメランキングTOP10</h2>
+      <p class="section-sub top10__sub">おすすめ度★・タグ・短い感想付きのメインランキング</p>
+      <ol id="top10-list" class="top10-list" aria-label="2026年版神アニメランキング"></ol>
+    </section>
+
+    <aside class="ad ad--section" aria-label="広告スペース（ランキング下）">
+      <p class="ad__label">AD</p>
+      <p class="ad__placeholder">広告スペース（728×90 など）</p>
+    </aside>
+
+    <!-- 2〜5. カテゴリ特集 -->
+    <section class="portal-section hub" aria-labelledby="hub-title">
+      <h2 id="hub-title" class="portal-section__title">ジャンル別アニメ特集</h2>
+      <p class="section-sub">最強主人公・神BGM・ダークファンタジー・見返したくなる作品</p>
+      <div id="hub-categories" class="hub-grid"></div>
+    </section>
+
+    <aside class="ad ad--section" aria-label="広告スペース（カテゴリ下）">
+      <p class="ad__label">AD</p>
+      <p class="ad__placeholder">広告スペース（300×250 など）</p>
+    </aside>
+
+    <!-- 6. 86好きならこれ -->
+    <section class="portal-section spotlight spotlight--86" aria-labelledby="spotlight-86-title">
+      <p class="spotlight__badge">IF YOU LIKE</p>
+      <h2 id="spotlight-86-title" class="portal-section__title">86好きならこれ</h2>
+      <p class="section-sub">戦場の緊迫感・神BGM・切ない雰囲気が近い作品</p>
+      <ol id="spotlight-86-list" class="spotlight-list"></ol>
+      <a href="anime-like86.html" class="spotlight__cta" data-spotlight-link="like86">86好き特集をすべて見る →</a>
+    </section>
+
+    <!-- 7. 陰の実力者好きならこれ -->
+    <section class="portal-section spotlight spotlight--shadow" aria-labelledby="spotlight-shadow-title">
+      <p class="spotlight__badge">IF YOU LIKE</p>
+      <h2 id="spotlight-shadow-title" class="portal-section__title">陰の実力者好きならこれ</h2>
+      <p class="section-sub">最強感・秘密組織・ド派手な決めシーンが近い作品</p>
+      <ol id="spotlight-shadow-list" class="spotlight-list"></ol>
+      <a href="anime-shadow.html" class="spotlight__cta" data-spotlight-link="shadow">陰の実力者好き特集をすべて見る →</a>
+    </section>
+
+    <section class="related portal-section" aria-labelledby="related-title">
+      <h2 id="related-title" class="portal-section__title">すべての特集記事</h2>
+      <ul id="related-list" class="related-list related-list--portal"></ul>
+    </section>
   </main>
 
-  <!-- 比較表（初心者向けの目安） -->
-  <section class="compare">
-    <h2 class="section-title">はじめての方へ</h2>
-    <p class="section-sub">どれを選ぶ？ざっくり比較</p>
-    <div class="compare__table-wrap">
-      <table class="compare__table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>VALORANT</th>
-            <th>Minecraft</th>
-            <th>原神</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>向いている人</td>
-            <td>対戦・反射神経が好き</td>
-            <td>創作・のんびり探索が好き</td>
-            <td>ストーリー・収集が好き</td>
-          </tr>
-          <tr>
-            <td>プレイスタイル</td>
-            <td>短時間の対戦中心</td>
-            <td>自分のペースで長時間</td>
-            <td>クエストと探索を組み合わせ</td>
-          </tr>
-          <tr>
-            <td>無料で始める</td>
-            <td>◎</td>
-            <td>体験版・旧版あり※</td>
-            <td>◎</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="compare__note">※ Minecraftは有料版が本体。体験や教育版など選択肢あり。</p>
-  </section>
+  <aside class="ad ad--bottom" aria-label="広告スペース（下）">
+    <p class="ad__label">AD</p>
+    <p class="ad__placeholder">広告スペース（728×90 など）</p>
+  </aside>
 
   <footer class="footer">
-    <p>Game Vault — 学習用サンプルサイト</p>
-    <p class="footer__small">各ゲームの名称・ロゴは各権利者に帰属します。</p>
+    <p>© アニメ特化ナビ — 最強主人公・神BGM・見返したくなるアニメ</p>
   </footer>
+
+  <script src="anime-pages-data.js" defer></script>
+  <script src="anime-seo.js" defer></script>
+  <script src="anime-top10.js" defer></script>
+  <script src="anime-home.js" defer></script>
 </body>
 </html>
