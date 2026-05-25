@@ -4,7 +4,8 @@
   <meta name="google-site-verification" content="rZLmgGH8lvE3CC8WBvwZaoPKQqdzMuMxdjwtndUpQ9Y" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="アニメ特化のおすすめサイト。2026年版神アニメランキングTOP10、最強主人公・神BGM・ダークファンタジー、86好き・陰の実力者好き向け特集。">
+  <link rel="canonical" href="https://my-game-site-nine.vercel.app/index.html">
+  <meta name="description" content="アニメ特化のおすすめサイト。神ランキングTOP10、86系・澤野っぽいBGM・最強主人公・陰の実力者・ダークファンタジー・一気見・バトル・初心者向け特集。">
   <title>【2026】アニメ特化サイト｜神ランキング・最強主人公・神BGM | アニメ特化ナビ</title>
   <link rel="stylesheet" href="anime-recommend.css">
 </head>
@@ -18,87 +19,59 @@
     </div>
   </header>
 
-  <nav class="site-nav site-nav--portal" aria-label="サイト内メニュー">
-    <a href="anime-recommend.html" class="site-nav__home is-current" aria-current="page">トップ</a>
-    <a href="anime-strongest.html">最強主人公</a>
-    <a href="anime-bgm.html">神BGM</a>
-    <a href="anime-rewatch.html">見返す</a>
-    <a href="anime-dark.html">ダーク</a>
-    <a href="anime-like86.html">86好き</a>
-    <a href="anime-shadow.html">陰実力者好き</a>
-  </nav>
-
+  <nav id="site-nav" class="site-nav site-nav--portal" aria-label="サイト内メニュー"></nav>
   <nav id="breadcrumb" class="breadcrumb" aria-label="パンくずリスト"></nav>
 
   <div class="page-lead page-lead--portal">
-    <p id="page-intro" class="page-intro">最強主人公・神BGM・何度も見返したくなるアニメを中心にした、アニメ特化のおすすめポータルです。</p>
+    <p id="page-intro" class="page-intro">最強主人公・神BGM・ダークファンタジーを中心にしたアニメ特化ポータル。細部を覚えなくても「雰囲気」で次の1本が見つかります。</p>
   </div>
 
   <aside class="ad ad--top" aria-label="広告スペース（上）">
     <p class="ad__label">AD</p>
-    <p class="ad__placeholder">広告スペース（728×90 など）</p>
+    <p class="ad__placeholder">広告スペース（728×90）</p>
   </aside>
 
   <main class="main main--portal">
-    <!-- 1. 2026年版 神アニメランキング TOP10 -->
     <section class="top10 portal-section" id="top10-ranking" aria-labelledby="top10-title">
       <p class="top10__badge">2026 EDITION</p>
-      <h2 id="top10-title" class="top10__title portal-section__title">2026年版 神アニメランキングTOP10</h2>
-      <p class="section-sub top10__sub">おすすめ度★・タグ・短い感想付きのメインランキング</p>
-      <ol id="top10-list" class="top10-list" aria-label="2026年版神アニメランキング"></ol>
+      <h2 id="top10-title" class="top10__title portal-section__title">神アニメランキング TOP10</h2>
+      <p class="section-sub">おすすめ度★・タグ・短い感想</p>
+      <ol id="top10-list" class="top10-list" aria-label="神アニメランキング"></ol>
     </section>
 
-    <aside class="ad ad--section" aria-label="広告スペース（ランキング下）">
+    <aside class="ad ad--section" aria-label="広告スペース">
       <p class="ad__label">AD</p>
-      <p class="ad__placeholder">広告スペース（728×90 など）</p>
+      <p class="ad__placeholder">広告スペース（728×90）</p>
     </aside>
 
-    <!-- 2〜5. カテゴリ特集 -->
-    <section class="portal-section hub" aria-labelledby="hub-title">
-      <h2 id="hub-title" class="portal-section__title">ジャンル別アニメ特集</h2>
-      <p class="section-sub">最強主人公・神BGM・ダークファンタジー・見返したくなる作品</p>
-      <div id="hub-categories" class="hub-grid"></div>
+    <section class="portal-section" aria-labelledby="portal-grid-title">
+      <h2 id="portal-grid-title" class="portal-section__title">特集記事一覧</h2>
+      <p class="section-sub">気になるテーマから10選ランキングへ</p>
+      <div id="portal-grid" class="portal-grid"></div>
     </section>
 
-    <aside class="ad ad--section" aria-label="広告スペース（カテゴリ下）">
+    <aside class="ad ad--section" aria-label="広告スペース（下）">
       <p class="ad__label">AD</p>
-      <p class="ad__placeholder">広告スペース（300×250 など）</p>
+      <p class="ad__placeholder">広告スペース（300×250）</p>
     </aside>
-
-    <!-- 6. 86好きならこれ -->
-    <section class="portal-section spotlight spotlight--86" aria-labelledby="spotlight-86-title">
-      <p class="spotlight__badge">IF YOU LIKE</p>
-      <h2 id="spotlight-86-title" class="portal-section__title">86好きならこれ</h2>
-      <p class="section-sub">戦場の緊迫感・神BGM・切ない雰囲気が近い作品</p>
-      <ol id="spotlight-86-list" class="spotlight-list"></ol>
-      <a href="anime-like86.html" class="spotlight__cta" data-spotlight-link="like86">86好き特集をすべて見る →</a>
-    </section>
-
-    <!-- 7. 陰の実力者好きならこれ -->
-    <section class="portal-section spotlight spotlight--shadow" aria-labelledby="spotlight-shadow-title">
-      <p class="spotlight__badge">IF YOU LIKE</p>
-      <h2 id="spotlight-shadow-title" class="portal-section__title">陰の実力者好きならこれ</h2>
-      <p class="section-sub">最強感・秘密組織・ド派手な決めシーンが近い作品</p>
-      <ol id="spotlight-shadow-list" class="spotlight-list"></ol>
-      <a href="anime-shadow.html" class="spotlight__cta" data-spotlight-link="shadow">陰の実力者好き特集をすべて見る →</a>
-    </section>
 
     <section class="related portal-section" aria-labelledby="related-title">
-      <h2 id="related-title" class="portal-section__title">すべての特集記事</h2>
+      <h2 id="related-title" class="portal-section__title">関連記事リンク</h2>
       <ul id="related-list" class="related-list related-list--portal"></ul>
     </section>
   </main>
 
-  <aside class="ad ad--bottom" aria-label="広告スペース（下）">
+  <aside class="ad ad--bottom" aria-label="広告スペース（フッター上）">
     <p class="ad__label">AD</p>
-    <p class="ad__placeholder">広告スペース（728×90 など）</p>
+    <p class="ad__placeholder">広告スペース（728×90）</p>
   </aside>
 
   <footer class="footer">
-    <p>© アニメ特化ナビ — 最強主人公・神BGM・見返したくなるアニメ</p>
+    <p>© アニメ特化ナビ</p>
   </footer>
 
   <script src="anime-pages-data.js" defer></script>
+  <script src="anime-nav.js" defer></script>
   <script src="anime-seo.js" defer></script>
   <script src="anime-top10.js" defer></script>
   <script src="anime-home.js" defer></script>

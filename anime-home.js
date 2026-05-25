@@ -1,68 +1,36 @@
 /**
- * トップページ（アニメ特化ポータル）のカテゴリ・特集プレビュー表示
+ * トップページ：特集カード一覧を表示
  */
 
 (function () {
-  renderHubCategories();
-  renderSpotlight("like86", "spotlight-86-list", "anime-like86.html");
-  renderSpotlight("shadow", "spotlight-shadow-list", "anime-shadow.html");
+  const grid = document.getElementById("portal-grid");
+  if (!grid || typeof PORTAL_SECTIONS === "undefined") return;
 
-  function renderHubCategories() {
-    const container = document.getElementById("hub-categories");
-    if (!container || typeof HUB_CATEGORIES === "undefined") return;
+  grid.innerHTML = "";
 
-    container.innerHTML = "";
+  PORTAL_SECTIONS.forEach(function (sec) {
+    const page = ANIME_PAGES[sec.id];
+    if (!page) return;
 
-    HUB_CATEGORIES.forEach(function (cat) {
-      const page = ANIME_PAGES[cat.id];
-      if (!page) return;
+    const top3 = page.list.slice(0, 3);
+    const article = document.createElement("article");
+    article.className = "portal-card portal-card--" + sec.accent;
 
-      const preview = page.list.slice(0, 3);
-      const article = document.createElement("article");
-      article.className = "hub-card hub-card--" + cat.accent;
-
-      let picksHtml = '<ul class="hub-card__picks">';
-      preview.forEach(function (item) {
-        picksHtml += "<li>" + escapeHtml(item.title) + "</li>";
-      });
-      picksHtml += "</ul>";
-
-      article.innerHTML =
-        '<div class="hub-card__glow"></div>' +
-        '<p class="hub-card__label">CATEGORY</p>' +
-        '<h3 class="hub-card__title">' + escapeHtml(cat.title) + "</h3>" +
-        '<p class="hub-card__desc">' + escapeHtml(cat.desc) + "</p>" +
-        picksHtml +
-        '<a href="' + cat.file + '" class="hub-card__cta">特集ページへ →</a>';
-
-      container.appendChild(article);
+    let picks = '<ul class="portal-card__picks">';
+    top3.forEach(function (item) {
+      picks += "<li>" + escapeHtml(item.title) + "</li>";
     });
-  }
+    picks += "</ul>";
 
-  function renderSpotlight(pageId, listId, linkFile) {
-    const listEl = document.getElementById(listId);
-    if (!listEl || !ANIME_PAGES[pageId]) return;
+    article.innerHTML =
+      '<span class="portal-card__badge">' + escapeHtml(sec.badge) + "</span>" +
+      '<h3 class="portal-card__title">' + escapeHtml(page.h1) + "</h3>" +
+      '<p class="portal-card__desc">' + escapeHtml(page.linkDesc) + "</p>" +
+      picks +
+      '<a href="' + page.file + '" class="portal-card__cta">特集を読む →</a>";
 
-    const page = ANIME_PAGES[pageId];
-    listEl.innerHTML = "";
-
-    page.list.slice(0, 4).forEach(function (item) {
-      const li = document.createElement("li");
-      li.className = "spotlight-item";
-      li.innerHTML =
-        '<span class="spotlight-item__rank">' + item.rank + "</span>" +
-        "<div>" +
-        '<strong class="spotlight-item__title">' + escapeHtml(item.title) + "</strong>" +
-        '<p class="spotlight-item__text">' + escapeHtml(item.atmosphere) + "</p>" +
-        "</div>";
-      listEl.appendChild(li);
-    });
-
-    const link = document.querySelector('[data-spotlight-link="' + pageId + '"]');
-    if (link) {
-      link.setAttribute("href", linkFile);
-    }
-  }
+    grid.appendChild(article);
+  });
 
   function escapeHtml(text) {
     const div = document.createElement("div");

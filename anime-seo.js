@@ -22,7 +22,12 @@
   setMeta("og:description", page.metaDescription);
   setMeta("og:type", "website");
 
-  /* --- 2. 導入文（ページ上部） --- */
+  /* --- 2. 見出し・導入文（ページ上部） --- */
+  const h1El = document.getElementById("page-h1");
+  if (h1El && page.h1) {
+    h1El.textContent = page.h1;
+  }
+
   const introEl = document.getElementById("page-intro");
   if (introEl && page.intro) {
     introEl.textContent = page.intro;
@@ -59,7 +64,7 @@
     if (!nav) return;
 
     const items = [
-      { url: "anime-recommend.html", label: "トップ" },
+      { url: "index.html", label: "トップ" },
     ];
 
     if (currentId !== "home") {
@@ -118,7 +123,7 @@
         "@type": "ListItem",
         position: 1,
         name: "トップ",
-        item: "anime-recommend.html",
+        item: SITE_BASE_URL + "index.html",
       },
     ];
 
@@ -127,7 +132,7 @@
         "@type": "ListItem",
         position: 2,
         name: currentPage.breadcrumb || currentPage.h1,
-        item: currentPage.file,
+        item: SITE_BASE_URL + currentPage.file,
       });
     }
 
